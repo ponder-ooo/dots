@@ -157,7 +157,7 @@ export PATH="/home/ponder/ponder/path:$PATH"
 
 export TRANSFORMERS_CACHE=/run/media/ponder/Data-0/ml_models/huggingface/transformers
 
-source /home/ponder/secrets
+source /home/ponder/.secret
 
 source /usr/share/nvm/init-nvm.sh
 
