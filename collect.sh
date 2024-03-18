@@ -13,8 +13,8 @@ cp ~/.config/picom.conf .
 cp ~/.config/polybar/config.ini .
 cp ~/.config/rofi/config.rasi .
 cp ~/.vimrc .
-cp ~/.Xmodmap .
 cp ~/ponder/bars .
 cp ~/ponder/keyboard.sh .
 cp ~/ponder/rofi-start .
 cp ~/ponder/pixel-lock .
+cp ~/ponder/.bashalias .
