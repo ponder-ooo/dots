@@ -1,0 +1,6 @@
+{
+    "coc.preferences.hoverTarget": "float",
+    "coc.preferences.colorSupport": true,
+    "rust-analyzer.inlayHints.typeHints": true,
+    "rust-analyzer.diagnostics.enable": true
+}
