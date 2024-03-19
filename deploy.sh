@@ -18,3 +18,4 @@ cp keyboard.sh ~/ponder/keyboard.sh
 cp rofi-start ~/ponder/rofi-start
 cp pixel-lock ~/ponder/pixel-lock
 cp .bashalias ~/ponder/.bashalias
+cp config ~/.i3/config
