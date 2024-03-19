@@ -1,6 +1,9 @@
 alias src='source ~/.bashrc'
 alias cls='clear; ls'
 
+alias caps='xmodmap ~/.Xmodmap'
+alias udevfix='sudo udevadm control --reload'
+
 alias gitt='git add .; git status'
 alias gdiff='git -c color.ui=always diff --cached | less -R'
 
@@ -60,6 +63,7 @@ alias aconda='conda activate'
 alias deconda='conda deactivate'
 alias sus='systemctl suspend'
 alias off='shutdown now'
+alias reboot='shutdown now'
 
 alias cck='clear; cargo check'
 alias ck='cargo check'

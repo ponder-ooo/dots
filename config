@@ -114,7 +114,7 @@ bindsym $mod+Shift+m exec --no-startup-id i3-input -F 'move container to workspa
 # Start Applications
 bindsym $mod+F1 exec --no-startup-id ~/ponder/.screenlayout/main.sh
 bindsym $mod+Ctrl+b exec --no-startup-id alacritty -e 'bmenu'
-bindsym $mod+Tab exec --no-startup-id firefox
+bindsym $mod+Tab exec --no-startup-id firefox --private-window
 #bindsym $mod+Tab exec --no-startup-id google-chrome-stable --incognito --disable-background-networking --dns-prefetch-disabled
 bindsym $mod+Shift+Tab exec --no-startup-id firefox
 bindsym $mod+x exec --no-startup-id pcmanfm
