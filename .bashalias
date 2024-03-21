@@ -1,5 +1,6 @@
 alias src='source ~/.bashrc'
 alias cls='clear; ls'
+alias wipe='history -c; clear; cd ~;'
 
 alias caps='xmodmap ~/.Xmodmap'
 alias udevfix='sudo udevadm control --reload'
@@ -11,9 +12,9 @@ alias suvi='sudo vim'
 alias v='neovide'
 alias dup='alacritty --working-directory . &'
 
-alias gpt='python ~/data0/code/python-scripts/chat/askgpt.py'
-alias writer='python ~/data0/code/python-scripts/chat/gpt.py'
-alias pygpt='python ~/data0/code/python-scripts/chat/pygpt.py'
+alias imsift='python ~/data0/code/python-scripts/util/sift.py'
+
+alias mistral='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/mistral-trismegistus-7b.Q6_K.gguf --log-disable --no-display-prompt -p'
 
 alias vsc='code . &'
 

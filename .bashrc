@@ -88,6 +88,12 @@ fi
 
 unset use_color safe_term match_lhs sh
 
+set -o noclobber
+
+bind "set completion-ignore-case on"
+bind "set completion-map-case on"
+bind "set show-all-if-ambiguous on"
+
 #alias cp="cp -i"                          # confirm before overwriting something
 #alias df='df -h'                          # human-readable sizes
 #alias free='free -m'                      # show sizes in MB
@@ -108,6 +114,7 @@ shopt -s expand_aliases
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
+shopt -s cmdhist
 
 #
 # # ex - archive extractor
@@ -163,3 +170,9 @@ source /usr/share/nvm/init-nvm.sh
 
 eval $(dircolors ~/.dircolors)
 
+shopt -s cdable_vars
+export dots="$HOME/ponder/dots"
+export data="$HOME/data0"
+export code="$HOME/data0/code"
+export py="$HOME/data0/code/python-scripts"
+export fic="$HOME/data0/code/fic"
