@@ -54,10 +54,16 @@ let g:jedi#completions_enabled = 0
 let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#environment_path = '/home/ponder/data0/code/python-scripts/envs/torch201/bin'
 
-
+let g:Hexokinase_highlighters = [ 'virtual' ]
+let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
 
 
 let g:NERDTreeWinPos = 'right'
+let g:NERDTreeFileLines = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeChDirMode = 2
 
 let g:fzf_preview_window = 'right:60%'
 let g:fzf_action = {
@@ -197,7 +203,8 @@ nnoremap <leader>erc :e ~/.config/nvim/init.vim<return>
 nnoremap <leader>plug :PlugInstall<return>
 
 "  terminal & splitting
-nnoremap <leader>tt :vsplit<return><c-w>l:terminal<return>i
+nnoremap <leader>tt :!alacritty &<return><return>
+" :vsplit<return><c-w>l:terminal<return>i
 nnoremap <leader>hh :vsplit<return><c-w>l
 nnoremap <leader>vv :split<return><c-w>
 
@@ -317,7 +324,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> <leader>K :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
