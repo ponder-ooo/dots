@@ -176,3 +176,6 @@ export data="$HOME/data0"
 export code="$HOME/data0/code"
 export py="$HOME/data0/code/python-scripts"
 export fic="$HOME/data0/code/fic"
+
+HELIX_RUNTIME=~/data0/code/rust/helix/runtime
+

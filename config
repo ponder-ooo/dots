@@ -55,7 +55,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty
-bindsym $mod+v exec --no-startup-id neovide
+bindsym $mod+v exec --no-startup-id PATH="/home/ponder/.nvm/versions/node/v18.17.1/bin:$PATH" neovide
 # backup option for when alacritty fails
 bindsym $mod+Shift+Return exec --no-startup-id urxvt
 
@@ -64,7 +64,7 @@ bindsym Shift+Escape kill
 #bindsym $mod+BackSpace kill
 
 # start program launcher
-bindsym $mod+r exec --no-startup-id rofi -show run -display-run " > "
+bindsym $mod+r exec --no-startup-id PATH="/home/ponder/.nvm/versions/node/v18.17.1/bin:$PATH" rofi -show run -display-run " > "
 
 # launch categorized menu
 #bindsym $mod+z exec --no-startup-id morc_menu

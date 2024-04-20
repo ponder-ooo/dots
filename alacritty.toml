@@ -33,7 +33,7 @@ white = "0xFFCCCC"
 yellow = "0xAA7733"
 
 [colors.primary]
-background = "0x222222"
+background = "0x222233"
 #bright_background = "0x3a3a3a"
 bright_foreground = "0xFFd9d9"
 #dim_background = "0x202020"
@@ -41,7 +41,7 @@ dim_foreground = "0xdbdbdb"
 foreground = "0xFEFFCC"
 
 [font]
-size = 12.0
+size = 10.0
 
 [font.bold]
 family = "Fira Code"

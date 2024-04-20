@@ -1,6 +1,6 @@
 alias src='source ~/.bashrc'
 alias cls='clear; ls'
-alias wipe='history -c; clear; cd ~;'
+alias wipe='history -c; history -w; clear; cd ~;'
 
 alias caps='xmodmap ~/.Xmodmap'
 alias udevfix='sudo udevadm control --reload'
@@ -14,7 +14,11 @@ alias dup='alacritty --working-directory . &'
 
 alias imsift='python ~/data0/code/python-scripts/util/sift.py'
 
-alias mistral='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/mistral-trismegistus-7b.Q6_K.gguf --log-disable --no-display-prompt -p'
+alias tris='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/mistral-trismegistus-7b.Q6_K.gguf --log-disable --no-display-prompt -p'
+alias tris_chat='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/mistral-trismegistus-7b.Q6_K.gguf --log-disable --no-display-prompt -cml'
+alias hermes='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/Hermes-2-Pro-Mistral-7B.Q6_K.gguf --log-disable --no-display-prompt -p'
+alias hermes_chat='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/Hermes-2-Pro-Mistral-7B.Q6_K.gguf --log-disable --no-display-prompt -cml'
+
 
 alias vsc='code . &'
 
@@ -38,6 +42,8 @@ alias pip='python -m pip'
 
 alias ficuio='cd ~/data0/code/python-scripts/ficscript/ui; npm run dev'
 alias ficapio='cd ~/data0/code/python-scripts/ficscript; conda activate ml3; python api.py'
+
+alias jp='cd ~/data0/code/python-scripts/jp; apy torch201; jupyter lab;'
 
 alias cdbots='cd ~/data0/code/python-scripts/discord-bots'
 alias cdsd='cd ~/data0/code/python-scripts/stable-diffusion; conda activate sd2'

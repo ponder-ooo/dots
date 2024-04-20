@@ -52,7 +52,10 @@ let g:deoplete#enable_at_startup = 1
 
 let g:jedi#completions_enabled = 0
 let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#environment_path = '/home/johnim/anaconda3/envs/sd2/bin/python'
+let g:jedi#environment_path = '/home/ponder/data0/code/python-scripts/envs/torch201/bin'
+
+
+
 
 let g:NERDTreeWinPos = 'right'
 
@@ -81,6 +84,7 @@ set guifont=Source\ Code\ Pro:h10
 set termguicolors
 set number
 set cursorline
+set signcolumn=yes
 
 "  tabbing
 set shiftwidth=4
@@ -283,6 +287,51 @@ endfunction
 autocmd! User GoyoEnter nested call IntoZen()
 autocmd! User GoyoLeave nested call ExitZen()
 
+" CoC
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1) :
+    \ CheckBackspace() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
 
 " Without this line, search results get highlighted whenever I source the file
 :noh
