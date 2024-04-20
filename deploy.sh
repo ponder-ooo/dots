@@ -1,5 +1,4 @@
 cp .Xmodmap ~/.Xmodmap
-cp .fehbg ~/.fehbg
 cp .bashrc ~/.bashrc
 cp .condarc ~/.condarc
 cp alacritty.toml ~/.config/alacritty/alacritty.toml
