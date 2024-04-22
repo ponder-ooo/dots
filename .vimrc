@@ -1,114 +1,251 @@
-" Disable vi compat; dunno why
-set nocompatible
+" This config is a subset of what's in my neovide init.vim; TODO should probably
+" consolidate & have that one source this one tbh
 
-filetype on
-
-filetype plugin on
-
-filetype indent on
-
-syntax on
-
-set number
-
-set cursorline
-
-set shiftwidth=4
-
-set tabstop=4
-
-set expandtab
-
-set showcmd
-
-set showmode
-
-set showmatch
-
-set hlsearch
-
-set history=1000
-
-set wildmenu
-
-set wildmode=list:longest
-
-let g:SimpylFold_docstring_preview=1
-
-" Plugins --- {{{
+" Plugins
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dense-analysis/ale'
+" General
 Plug 'preservim/nerdtree'
-Plug 'cjrh/vim-conda'
+Plug 'scrooloose/nerdcommenter'
 Plug 'tmhedberg/SimpylFold'
+
+" Appearance
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'bluz71/vim-nightfly-colors', { 'as': 'nightfly' }
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
+" Web
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+
+" Rust
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
-" }}}
+let g:SimpylFold_docstring_preview=1
 
-" Mappings --- {{{
+let g:NERDTreeWinPos = 'right'
+let g:NERDTreeFileLines = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeChDirMode = 2
 
-nnoremap <leader>src :source ~/.vimrc<return>
+set nocompatible
 
-inoremap jj <esc>
+" theme / appearance
+colorscheme nightfly
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+set t_Co=256
+set guifont=Source\ Code\ Pro:h10
+set termguicolors
+set number
+set cursorline
+set signcolumn=yes
+
+" tabbing
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set smartindent
+set expandtab
+
+"  make line breaks traversable
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+"  use system clipboard
+set clipboard=unnamed
+set clipboard+=unnamedplus
+
+"  nerd shit / &c
+set encoding=utf-8
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
+set updatetime=200
+set history=1000
+set backup
+set ruler " column / row number
+set showcmd
+set showmode
+set showmatch
+set hlsearch
+set incsearch
+set wildmenu
+set wildmode=list:longest
+set foldmethod=indent
+set foldlevel=99
+
+" Highlighting
+
+"  highlight spaces at end of line (when not in insert mode)
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+\%#\@<!$/
+:au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+:au InsertLeave * match ExtraWhitespace /\s\+$/
+
+" Keymapping
 
 let mapleader = ","
 
-if has ("xterm_clipboard")
-    vnoremap <c-c> "+y
-    inoremap <c-v> <esc>"+p i
-else
-    vnoremap <c-c> :!xclip -f -sel -clip <return>
-    inoremap <c-v> <esc>:r!xclip -o -sel clip <return>
-endif
+"  replace word
+nnoremap <leader>r lbdei
 
-inoremap <c-z> <esc>u i
-nnoremap <c-o> u
+"  enter insert mode directly from visual mode
+vnoremap i <esc>i
+"  copy from visual mode
+vnoremap <c-c> "+y
 
-nnoremap <leader>, ``
-nnoremap <leader>nt :NERDTreeToggle<return>
+"  ctrl+f to find files
+nnoremap <c-f> :Files<cr>
 
-set foldmethod=indent
-set foldlevel=99
+"  alt+direction to move lines up/down
+nnoremap <silent><m-j> mz:m+<return>`z
+nnoremap <silent><m-k> mz:m-2<return>`z
+"  & the same for multiple lines in visual mode
+"  no idea how this works, took it from nori's dotfiles (https://nori.gay)
+vnoremap <silent><m-j> :m'>+<return>`<my`>mzgv`yo`z
+vnoremap <silent><m-k> :m'<-2<return>`>my`<mzgv`yo`z
+
+"  same as above but for up/down instead of j/k
+nnoremap <silent><m-down> mz:m+<return>`z
+nnoremap <silent><m-up> mz:m-2<return>`z
+vnoremap <silent><m-down> :m'>+<return>`<my`>mzgv`yo`z
+vnoremap <silent><m-up> :m'<-2<return>`>my`<mzgv`yo`z
+
+"  ctrl-z as undo, per my muscle memory
+nnoremap <c-z> u
+"  +shift for redo
+nnoremap <c-s-z> <c-r>
+
+"  undo current insert operation with ctrl-z
+inoremap <c-z> <esc>ui
+"  & redo with ctrl-shift-z
+inoremap <c-s-z> <esc><c-r>i
+
+"  paste in insert mode
+inoremap <c-v> <esc>:set paste<return>a<c-r>+<esc>:set nopaste<return>a
+"  paste in normal mode
+nnoremap <c-v> :set paste<return>i<c-r>+<esc>:set nopaste<return>
+"  jj to quickly exit insert
+inoremap jj <esc>
+
+"  cycle through completion options
+inoremap <leader><tab> <c-n>
+inoremap <leader><s-tab> <c-p>
+
+"  back to previous place
+nnoremap <leader>. ``
+
+"  nerdtree - maybe make this a 2-key command instead of 3
+nnoremap <silent><leader>nt :NERDTreeToggle<return>
+
+"  some niceties for editing this file
+nnoremap <leader>src :source ~/.vimrc<return>
+nnoremap <leader>erc :e ~/.vimrc<return>
+nnoremap <leader>plug :PlugInstall<return>
+
+"  launch a terminal at cwd
+nnoremap <leader>tt :!alacritty &<return><return>
+
+"  splits
+nnoremap <leader>hh :vsplit<return><c-w>l
+nnoremap <leader>vv :split<return><c-w>
+
+"  folding
 nnoremap <space> za
 
+"  insert lines above/below without entering insert mode
 nnoremap o o<esc>
 nnoremap O O<esc>
 
+"  center the cursor when jumping between search results
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap <leader>/ :noh<return>
 
+"  search for tab to clear search results
+nnoremap /<tab> :noh<return>
+
+"  shift+direction to move between splits
 nnoremap <s-j> <c-w>j
 nnoremap <s-h> <c-w>h
 nnoremap <s-k> <c-w>k
 nnoremap <s-l> <c-w>l
 
-" }}}
+"  ctrl+left/right to hop entire words at a time
+nnoremap <c-l> <c-right>
+nnoremap <c-h> <c-left>
 
-" Vimscript --- {{{
+"  ctrl+shift+right to hop to end of line
+nnoremap <c-s-l> $
+nnoremap <c-s-right> $
 
-" Enable code folding
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
+"  & similar for hopping to the start
+nnoremap <c-s-h> ^
+nnoremap <c-s-left> ^
 
-" }}}
+"  maybe figure out how to make this terminal-mode only; makes ctrl-c work in
+"  normal mode
+nnoremap <c-c> i<c-c><esc>
 
-" Status Line --- {{{
+"  exit the terminal the same way as exiting insert mode
+tnoremap <esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
 
-set statusline=
+"  quick quit
+nnoremap <leader>q :q<return>
+"  just close the whole damn editor
+nnoremap <leader><leader><leader>q :qa!<return>
 
-set statusline+=\ %F\ (%Y)\ %M\ %R
+"  ctrl-s to save, normal & insert modes
+nnoremap <C-s> :w<return>
+inoremap <c-s> <esc>:w<return>li
 
-set statusline+==%=
+" Goyo
+nnoremap <silent><leader>zen :Goyo<return>
 
-set statusline+=\ ascii:\ %b\ (0x%B)\ line:\ %l\ pos:\ %c\ %p%%
+function! IntoZen()
+    setlocal linebreak
+    :Limelight
+    "  navigate by actual position on screen instead of by row/column
+    nnoremap <buffer> j gj
+    nnoremap <buffer> k gk
+    nnoremap <buffer> $ g$
+    nnoremap <buffer> ^ g^
+    " undos break on punctuation
+    inoremap <buffer> . .<c-g>u
+    inoremap <buffer> ! !<c-g>u
+    inoremap <buffer> ? ?<c-g>u
+    inoremap <buffer> , ,<c-g>u
+    inoremap <buffer> ; ;<c-g>u
+    inoremap <buffer> : :<c-g>u
+endfunction
 
-set laststatus=2
+function! ExitZen()
+    setlocal nolinebreak
+    :Limelight!
+    unmap <buffer> j
+    unmap <buffer> k
+    unmap <buffer> $
+    unmap <buffer> ^
+    iunmap <buffer> .
+    iunmap <buffer> !
+    iunmap <buffer> ?
+    iunmap <buffer> ,
+    iunmap <buffer> ;
+    iunmap <buffer> :
+endfunction
 
-" }}}
+autocmd! User GoyoEnter nested call IntoZen()
+autocmd! User GoyoLeave nested call ExitZen()
+
+" Without this line, search results get highlighted whenever I source the file
+:noh
 

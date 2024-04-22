@@ -5,13 +5,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 " General
 Plug 'preservim/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-"  code completion. consider switching to YouCompleteMe
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tmhedberg/SimpylFold'
+Plug 'Maan2003/lsp_lines.nvim'
+
 "  fuzzy find
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'Maan2003/lsp_lines.nvim'
 
 " Appearance
 Plug 'vim-airline/vim-airline'
@@ -19,15 +18,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'bluz71/vim-nightfly-colors', { 'as': 'nightfly' }
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-
-" Python
-"Plug 'davidhalter/jedi-vim'
-"Plug 'zchee/deoplete-jedi'
-"Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-"Plug 'cjrh/vim-conda'
-
-"Plug 'neomake/neomake'
-"Plug 'dense-analysis/ale'
 
 " Web
 Plug 'othree/html5.vim'
@@ -52,15 +42,6 @@ if exists("g:neovide")
 endif
 
 let g:SimpylFold_docstring_preview=1
-
-let g:deoplete#enable_at_startup = 1
-
-let g:jedi#completions_enabled = 0
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#environment_path = '/home/ponder/data0/code/python-scripts/envs/torch201/bin'
-
-let g:Hexokinase_highlighters = [ 'virtual' ]
-let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
 
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeFileLines = 1

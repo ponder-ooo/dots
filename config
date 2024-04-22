@@ -64,6 +64,8 @@ for_window [class="GParted"] floating enable border none
 for_window [class="Lxappearance"] floating enable border none
 for_window [class="Pavucontrol"] floating enable border none
 for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Ants!"] floating enable border none
+for_window [class="Stem UI Test"] floating enable border none
 
 # === Bindings ===
 
@@ -136,6 +138,7 @@ bindsym $mod+comma scratchpad show
 
 # tiling / floating
 bindsym $mod+0 floating toggle
+bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 bindsym $mod+f fullscreen toggle
