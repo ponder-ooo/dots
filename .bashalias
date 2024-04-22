@@ -2,13 +2,11 @@ alias src='source ~/.bashrc'
 alias cls='clear; ls'
 alias wipe='history -c; history -w; clear; cd ~;'
 
-alias caps='xmodmap ~/.Xmodmap'
-alias udevfix='sudo udevadm control --reload'
+alias caps='xmodmap ~/.Xmodmap; sudo udevadm control --reload'
 
 alias gitt='git add .; git status'
 alias gdiff='git -c color.ui=always diff --cached | less -R'
 
-alias suvi='sudo vim'
 alias v='neovide'
 alias dup='alacritty --working-directory . &'
 
@@ -18,9 +16,6 @@ alias tris='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/mistral
 alias tris_chat='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/mistral-trismegistus-7b.Q6_K.gguf --log-disable --no-display-prompt -cml'
 alias hermes='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/Hermes-2-Pro-Mistral-7B.Q6_K.gguf --log-disable --no-display-prompt -p'
 alias hermes_chat='~/data0/code/cpp/llama.cpp/main -m ~/data0/ml_models/lm_gguf/Hermes-2-Pro-Mistral-7B.Q6_K.gguf --log-disable --no-display-prompt -cml'
-
-
-alias vsc='code . &'
 
 alias nota='neovide ~/ponder/notes'
 
@@ -40,18 +35,12 @@ alias llg='ll | grep -i'
 
 alias pip='python -m pip'
 
-alias ficuio='cd ~/data0/code/python-scripts/ficscript/ui; npm run dev'
-alias ficapio='cd ~/data0/code/python-scripts/ficscript; conda activate ml3; python api.py'
-
 alias jp='cd ~/data0/code/python-scripts/jp; apy torch201; jupyter lab;'
 
-alias cdbots='cd ~/data0/code/python-scripts/discord-bots'
-alias cdsd='cd ~/data0/code/python-scripts/stable-diffusion; conda activate sd2'
 alias cdstem='cd ~/data0/code/csharp/Stem'
 alias cdcode='cd ~/data0/code'
 alias cdpy='cd ~/data0/code/python-scripts'
 alias cdr='cd ~/data0/code/rust'
-
 alias cdfic='cd ~/data0/code/fic/'
 alias ficui='cd ~/data0/code/fic/ficui; npm run build; npm run built'
 alias sdapi='cd ~/data0/code/fic/sdapi; apy temp; python server.py'
@@ -61,13 +50,10 @@ alias lay2='~/ponder/.screenlayout/2mon.sh; i3-msg restart'
 alias lay0='~/ponder/.screenlayout/main.sh; i3-msg restart'
 alias lay1='~/ponder/.screenlayout/left_plus_tablet.sh; i3-msg restart'
 
-alias balias='neovide ~/ponder/.bashalias; source ~/.bashrc'
-alias brc='neovide ~/.bashrc; source ~/.bashrc'
-alias vrc='neovide ~/.vimrc'
-alias nvrc='neovide ~/.config/nvim/init.vim'
+alias balias='neovide ~/ponder/.bashalias'
+alias brc='neovide ~/.bashrc'
+alias vrc='neovide ~/.config/nvim/init.vim'
 
-alias aconda='conda activate'
-alias deconda='conda deactivate'
 alias sus='systemctl suspend'
 alias off='shutdown now'
 alias reboot='shutdown now'
@@ -77,9 +63,15 @@ alias ck='cargo check'
 alias ccr='clear; cargo run'
 alias cr='cargo run'
 
+alias ,q=exit
+
 apy () {
     source /run/media/ponder/Data-0/code/python-scripts/envs/$1/bin/activate
+    alias ,q=depy
 }
 alias lspy='ls /run/media/ponder/Data-0/code/python-scripts/envs'
-alias depy='deactivate'
+depy () {
+    deactivate
+    alias ,q=exit
+}
 
