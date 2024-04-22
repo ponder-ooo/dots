@@ -11,6 +11,7 @@ Plug 'tmhedberg/SimpylFold'
 "  fuzzy find
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'Maan2003/lsp_lines.nvim'
 
 " Appearance
 Plug 'vim-airline/vim-airline'
@@ -41,10 +42,14 @@ call plug#end()
 
 " Neovide / Plugin Config
 
-let g:neovide_scale_factor = 1
-let g:neovide_transparency = 0.85
-let g:neovide_floating_blur_amount_x = 5.0
-let g:neovide_floating_blur_amount_y = 5.0
+if exists("g:neovide")
+    let g:neovide_scale_factor = 1
+    let g:neovide_transparency = 0.7
+    let g:neovide_floating_blur_amount_x = 5.0
+    let g:neovide_floating_blur_amount_y = 5.0
+    let g:neovide_padding_left = 0
+    set linespace=1
+endif
 
 let g:SimpylFold_docstring_preview=1
 
@@ -56,7 +61,6 @@ let g:jedi#environment_path = '/home/ponder/data0/code/python-scripts/envs/torch
 
 let g:Hexokinase_highlighters = [ 'virtual' ]
 let g:Hexokinase_optInPatterns = 'full_hex,triple_hex,rgb,rgba,hsl,hsla,colour_names'
-
 
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeFileLines = 1
@@ -78,6 +82,13 @@ augroup fzf
 augroup END
 
 " General Settings
+
+if exists("g:neovide")
+    "  ctrl+scroll & control+0 to adjust scale & reset to default
+    nnoremap <C-ScrollWheelDown> :let g:neovide_scale_factor *= 0.9<return>
+    nnoremap <C-ScrollWheelUp> :let g:neovide_scale_factor *= 1.11111111<return>
+    nnoremap <c-0> :let g:neovide_scale_factor = 1.0<return>
+endif
 
 "  theme / appearance
 colorscheme nightfly
@@ -137,6 +148,9 @@ set foldlevel=99
 
 let mapleader = ","
 
+"  replace word
+nnoremap <leader>r lbdei
+
 "  enter insert mode directly from visual mode
 vnoremap i <esc>i
 "  copy from visual mode
@@ -159,9 +173,9 @@ nnoremap <silent><m-up> mz:m-2<return>`z
 vnoremap <silent><m-down> :m'>+<return>`<my`>mzgv`yo`z
 vnoremap <silent><m-up> :m'<-2<return>`>my`<mzgv`yo`z
 
-"  undo is ctrl-z i don't care that u is easier to press
+"  ctrl-z as undo, per my muscle memory
 nnoremap <c-z> u
-"  and redo is ctrl-shift-z
+"  +shift for redo
 nnoremap <c-s-z> <c-r>
 
 "  undo current insert operation with ctrl-z
@@ -180,19 +194,15 @@ inoremap jj <esc>
 inoremap <leader><tab> <c-n>
 inoremap <leader><s-tab> <c-p>
 
-"  ctrl+scroll & control+0 to adjust scale & reset to default
-nnoremap <C-ScrollWheelDown> :let g:neovide_scale_factor *= 0.9<return>
-nnoremap <C-ScrollWheelUp> :let g:neovide_scale_factor *= 1.11111111<return>
-nnoremap <c-0> :let g:neovide_scale_factor = 1.0<return>
 
 "  navigate to errors
-nnoremap <leader>er :Semshi goto error<return>:Semshi error<return>
-nnoremap <leader>rr :Semshi error<return>
-nnoremap <leader>ss :Semshi toggle<return>
-nnoremap <leader>re :Semshi rename<return>
+"nnoremap <leader>er :Semshi goto error<return>:Semshi error<return>
+"nnoremap <leader>rr :Semshi error<return>
+"nnoremap <leader>ss :Semshi toggle<return>
+"nnoremap <leader>re :Semshi rename<return>
 
 "  back to previous place
-nnoremap <leader>, ``
+nnoremap <leader>. ``
 
 "  nerdtree - maybe make this a 2-key command instead of 3
 nnoremap <silent><leader>nt :NERDTreeToggle<return>
@@ -202,9 +212,10 @@ nnoremap <leader>src :source ~/.config/nvim/init.vim<return>
 nnoremap <leader>erc :e ~/.config/nvim/init.vim<return>
 nnoremap <leader>plug :PlugInstall<return>
 
-"  terminal & splitting
+"  launch a terminal at cwd
 nnoremap <leader>tt :!alacritty &<return><return>
-" :vsplit<return><c-w>l:terminal<return>i
+
+"  splits
 nnoremap <leader>hh :vsplit<return><c-w>l
 nnoremap <leader>vv :split<return><c-w>
 
@@ -251,9 +262,9 @@ tnoremap jj <C-\><C-n>
 "  quick quit
 nnoremap <leader>q :q<return>
 "  just close the whole damn editor
-nnoremap <leader>qqq :qa!<return>
+nnoremap <leader><leader><leader>q :qa!<return>
 
-"  ctrl-s is save, of course
+"  ctrl-s to save, normal & insert modes
 nnoremap <C-s> :w<return>
 inoremap <c-s> <esc>:w<return>li
 
@@ -268,6 +279,7 @@ function! IntoZen()
     nnoremap <buffer> k gk
     nnoremap <buffer> $ g$
     nnoremap <buffer> ^ g^
+    " undos break on punctuation
     inoremap <buffer> . .<c-g>u
     inoremap <buffer> ! !<c-g>u
     inoremap <buffer> ? ?<c-g>u
@@ -323,8 +335,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
-nnoremap <silent> <leader>K :call ShowDocumentation()<CR>
+"  show docs in preview window
+nnoremap <silent> <leader>k :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
@@ -338,7 +350,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader><leader>r <Plug>(coc-rename)
 
 " Without this line, search results get highlighted whenever I source the file
 :noh
