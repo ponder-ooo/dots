@@ -1,6 +1,5 @@
 cp .Xmodmap ~/.Xmodmap
 cp .bashrc ~/.bashrc
-cp .condarc ~/.condarc
 cp alacritty.toml ~/.config/alacritty/alacritty.toml
 cp dunstrc ~/.config/dunst/dunstrc
 cp i3-scrot.conf ~/.config/i3-scrot.conf
