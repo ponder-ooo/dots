@@ -1,6 +1,7 @@
 alias src='source ~/.bashrc'
 alias cls='clear; ls'
 alias wipe='history -c; history -w; clear; cd ~;'
+alias scratch='cd ~/ponder/scratch; find ~/ponder/scratch -type f -delete'
 
 alias caps='xmodmap ~/.Xmodmap; sudo udevadm control --reload'
 
