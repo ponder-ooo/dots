@@ -4,6 +4,7 @@ cp ~/.config/alacritty/alacritty.toml .
 cp ~/.config/dunst/dunstrc .
 cp ~/.config/i3-scrot.conf .
 cp ~/.config/nvim/init.vim .
+cp ~/.config/nvim/lua/autumn.lua .
 cp ~/.config/nvim/coc-settings.json .
 cp ~/.config/picom.conf .
 cp ~/.config/polybar/config.ini .

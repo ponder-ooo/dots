@@ -25,10 +25,12 @@ Plug 'pangloss/vim-javascript'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
 " Rust
-Plug 'rust-lang/rust.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'rust-lang/rust.vim'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+:lua require('autumn')
 
 " Neovide / Plugin Config
 
@@ -124,6 +126,11 @@ set foldlevel=99
 :match ExtraWhitespace /\s\+\%#\@<!$/
 :au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 :au InsertLeave * match ExtraWhitespace /\s\+$/
+
+:highlight DiagnosticVirtualTextError guifg=red
+:highlight DiagnosticVirtualTextWarn guifg=yellow
+:highlight DiagnosticVirtualTextInfo guifg=white
+:highlight DiagnosticVirtualTextHint guifg=#CCDDFF
 
 " Keymapping
 
@@ -243,7 +250,7 @@ tnoremap jj <C-\><C-n>
 "  quick quit
 nnoremap <leader>q :q<return>
 "  just close the whole damn editor
-nnoremap <leader><leader><leader>q :qa!<return>
+"nnoremap <leader><leader><leader>q :qa!<return>
 
 "  ctrl-s to save, normal & insert modes
 nnoremap <C-s> :w<return>
@@ -288,50 +295,51 @@ autocmd! User GoyoEnter nested call IntoZen()
 autocmd! User GoyoLeave nested call ExitZen()
 
 " CoC
-inoremap <silent><expr> <TAB>
-    \ coc#pum#visible() ? coc#pum#next(1) :
-    \ CheckBackspace() ? "\<Tab>" :
-    \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+"inoremap <silent><expr> <TAB>
+"    \ coc#pum#visible() ? coc#pum#next(1) :
+"    \ CheckBackspace() ? "\<Tab>" :
+"    \ coc#refresh()
+"inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"function! CheckBackspace() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
 " Use <c-space> to trigger completion
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+"if has('nvim')
+"  inoremap <silent><expr> <c-space> coc#refresh()
+"else
+"  inoremap <silent><expr> <c-@> coc#refresh()
+"endif
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 
 "  show docs in preview window
-nnoremap <silent> <leader>k :call ShowDocumentation()<CR>
+"nnoremap <silent> <leader>k :call ShowDocumentation()<CR>
 
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
+"function! ShowDocumentation()
+"  if CocAction('hasProvider', 'hover')
+"    call CocActionAsync('doHover')
+"  else
+"    call feedkeys('K', 'in')
+"  endif
+"endfunction
 
 " Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming
-nmap <leader><leader>r <Plug>(coc-rename)
+"nmap <leader><leader>r <Plug>(coc-rename)
+
 
 " Without this line, search results get highlighted whenever I source the file
 :noh
