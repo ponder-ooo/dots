@@ -75,3 +75,12 @@ depy () {
     alias ,q=exit
 }
 
+assh () {
+    eval `ssh-agent`
+    ssh-add ~/.ssh/$1
+}
+
+lssh () {
+    ls ~/.ssh | grep .pub | sed 's/\.[^.]*$//'
+}
+
