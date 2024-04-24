@@ -5,14 +5,12 @@ cp dunstrc ~/.config/dunst/dunstrc
 cp i3-scrot.conf ~/.config/i3-scrot.conf
 cp init.vim ~/.config/nvim/init.vim
 cp autumn.lua ~/.config/nvim/lua/autumn.lua
-cp coc-settings.json ~/.config/nvim/coc-settings.json
 cp picom.conf ~/.config/picom.conf
 cp config.ini ~/.config/polybar/config.ini
 cp config.rasi ~/.config/rofi/config.rasi
 cp .vimrc ~/.vimrc
 cp bars ~/ponder/bars
 cp keyboard.sh ~/ponder/keyboard.sh
-cp rofi-start ~/ponder/rofi-start
 cp pixel-lock ~/ponder/pixel-lock
 cp .bashalias ~/ponder/.bashalias
 cp config ~/.i3/config
