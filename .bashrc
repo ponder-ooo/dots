@@ -117,6 +117,7 @@ ex ()
 function gigs () { du -h $1 | grep -E "[0-9]G"; };
 
 export PATH="/home/ponder/ponder/path:$PATH"
+export PATH="/home/ponder/data0/tools/Zotero_linux-x86_64:$PATH"
 export TRANSFORMERS_CACHE=/run/media/ponder/Data-0/ml_models/huggingface/transformers
 
 source /home/ponder/.secret

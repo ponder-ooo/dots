@@ -78,8 +78,8 @@ bindsym $mod+v exec --no-startup-id PATH="/home/ponder/.nvm/versions/node/v18.17
 bindsym $mod+Shift+v exec --no-startup-id urxvt -e vim
 
 # browser
-bindsym $mod+Tab exec --no-startup-id firefox --private-window
-bindsym $mod+Shift+Tab exec --no-startup-id firefox
+bindsym $mod+Tab exec --no-startup-id firefox-nightly --private-window
+bindsym $mod+Shift+Tab exec --no-startup-id firefox-nightly
 #bindsym $mod+Tab exec --no-startup-id google-chrome-stable --incognito --disable-background-networking --dns-prefetch-disabled
 #bindsym $mod+Shift+Tab exec --no-startup-id google-chrome-stable --disable-background-networking --dns-prefetch-disabled
 
@@ -88,7 +88,7 @@ bindsym $mod+x exec --no-startup-id pcmanfm
 # TODO ranger
 
 # launcher
-bindsym $mod+r exec --no-startup-id PATH="/home/ponder/.nvm/versions/node/v18.17.1/bin:$PATH" rofi -show run -display-run " > "
+bindsym $mod+r exec --no-startup-id PATH="/home/ponder/.nvm/versions/node/v18.17.1/bin:/home/ponder/data0/tools/Zotero_linux-x86_64:$PATH" rofi -show run -display-run " > "
 
 # screenshots
 bindsym Print exec --no-startup-id i3-scrot
